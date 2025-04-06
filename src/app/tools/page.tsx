@@ -1,6 +1,7 @@
-import Image from "next/image";
+import React from 'react';
 
-export default function Home() {
+export default function ToolsPage() {
+  // Using the same tools data structure from the homepage
   const tools = [
     {
       id: 'security-tools',
@@ -100,32 +101,38 @@ export default function Home() {
     }
   ];
 
+  // Flatten all tools into a single array for display
+  const allTools = tools.flatMap(category => 
+    category.items.map(tool => ({
+      ...tool,
+      category: category.title
+    }))
+  );
+
   return (
-    <div className="space-y-12">
+    <div className="space-y-8">
       <div className="text-center space-y-4">
-        <h1 className="text-4xl font-bold">Free Online Tools</h1>
+        <h1 className="text-3xl font-bold">All Tools</h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          A collection of free online tools to help with your daily tasks. No registration required.
+          Browse our complete collection of free online tools
         </p>
       </div>
 
-      <div className="space-y-12">
-        {tools.map((category) => (
-          <div key={category.id} className="space-y-6">
-            <h2 className="text-2xl font-semibold">{category.title}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {category.items.map((tool) => (
-                <a
-                  key={tool.id}
-                  href={tool.path}
-                  className="block p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
-                >
-                  <h3 className="text-xl font-semibold mb-2">{tool.name}</h3>
-                  <p className="text-gray-600">{tool.description}</p>
-                </a>
-              ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {allTools.map((tool) => (
+          <a
+            key={tool.id}
+            href={tool.path}
+            className="block p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div className="flex flex-col h-full">
+              <h3 className="text-xl font-semibold mb-2">{tool.name}</h3>
+              <p className="text-gray-600 mb-2">{tool.description}</p>
+              <span className="mt-auto text-sm text-gray-500">
+                Category: {tool.category}
+              </span>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </div>

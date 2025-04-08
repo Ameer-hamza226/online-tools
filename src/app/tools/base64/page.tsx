@@ -1,15 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Metadata } from 'next';
 import Head from 'next/head';
-
-// Define metadata for this page
-export const metadata: Metadata = {
-  title: 'Base64 Encoder/Decoder - Free Online Tool',
-  description: 'Free online tool to encode and decode text to and from Base64 format. No ads, no registration, and completely free.',
-  keywords: ['base64', 'encoder', 'decoder', 'base64 converter', 'online tool', 'free tool'],
-};
 
 export default function Base64Tool() {
   const [input, setInput] = useState('');

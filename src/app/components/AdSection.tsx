@@ -23,7 +23,7 @@ export default function AdSection({ position = 'top' }: AdSectionProps) {
   const [adError, setAdError] = useState(false);
   const [adBlocked, setAdBlocked] = useState(false);
   const adRef = useRef<HTMLDivElement>(null);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   // Check if ad blocker is active
   useEffect(() => {
